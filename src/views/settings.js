@@ -31,6 +31,7 @@ export async function renderSettings(container) {
     const panels  = {
       session:  sessionPanel,
       subjects: subjectsPanel,
+      recurring: recurringPanel,
       contexts: contextsPanel,
       alerts:   alertsPanel,
       sync:     syncPanel,
@@ -137,7 +138,7 @@ function sessionPanel(el, draft) {
         </div>
       </div>
     </div>
-  \`
+  `
   wireInputs(el, draft)
 
   el.querySelector('#day-grid').addEventListener('click', e => {
@@ -550,33 +551,33 @@ async function recurringPanel(el, draft) {
                 const task   = r.taskId ? activeTasks.find(t => t.id === r.taskId) : null
                 const days   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
                 const dayStr = (r.days || []).map(d => days[d]).join(', ')
-                return \`
+                return `
                   <div class="recur-row">
                     <div class="recur-row-left">
                       <label class="toggle recur-toggle">
-                        <input type="checkbox" class="recur-active-toggle" data-id="\${r.id}" \${r.active ? 'checked' : ''}>
+                        <input type="checkbox" class="recur-active-toggle" data-id="${r.id}" ${r.active ? 'checked' : ''}>
                         <span class="toggle-track"></span>
                         <span class="toggle-thumb"></span>
                       </label>
                     </div>
                     <div class="recur-row-body">
                       <p class="recur-title">
-                        <span style="color:\${subj?.color || 'var(--accent)'}">
-                          \${subj?.icon ? subj.icon + ' ' : ''}\${subj?.name || 'Unknown subject'}
+                        <span style="color:${subj?.color || 'var(--accent)'}">
+                          ${subj?.icon ? subj.icon + ' ' : ''}${subj?.name || 'Unknown subject'}
                         </span>
-                        \${task ? \` · \${task.title}\` : ''}
+                        ${task ? ` · ${task.title}` : ''}
                       </p>
-                      <p class="recur-meta">\${dayStr || 'No days set'} · \${r.startTime || '—'} · \${r.durationMins}m</p>
+                      <p class="recur-meta">${dayStr || 'No days set'} · ${r.startTime || '—'} · ${r.durationMins}m</p>
                     </div>
-                    <button class="ctx-remove-btn recur-delete" data-id="\${r.id}">×</button>
+                    <button class="ctx-remove-btn recur-delete" data-id="${r.id}">×</button>
                   </div>
-                \`
+                `
               }).join('')
           }
         </div>
         <button class="btn-ghost full-width-ghost" id="add-recur">+ Add recurring session</button>
       </div>
-    \`
+    `
 
     // Wire toggles
     el.querySelectorAll('.recur-active-toggle').forEach(inp => {
@@ -606,7 +607,7 @@ function openAddRecurringModal(subjects, tasks, onSave) {
   const DAY_LABELS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
   const overlay = document.createElement('div')
   overlay.className = 'modal-overlay'
-  overlay.innerHTML = \`
+  overlay.innerHTML = `
     <div class="modal-card detail-modal">
       <div class="modal-drag-bar"></div>
       <div class="modal-header">
@@ -618,23 +619,23 @@ function openAddRecurringModal(subjects, tasks, onSave) {
       <div class="modal-body">
         <label class="modal-field-label">Subject</label>
         <div class="seg-row" id="rs-subj" style="flex-wrap:wrap;margin-bottom:14px">
-          \${subjects.map((s, i) => \`
-            <button class="seg-btn \${i === 0 ? 'seg-ctx-active' : ''}" data-id="\${s.id}" data-color="\${s.color}"
-              style="\${i === 0 ? \`background:\${s.color}22;border-color:\${s.color};color:\${s.color}\` : ''}">
-              \${s.icon ? s.icon + ' ' : ''}\${esc(s.name)}
+          ${subjects.map((s, i) => `
+            <button class="seg-btn ${i === 0 ? 'seg-ctx-active' : ''}" data-id="${s.id}" data-color="${s.color}"
+              style="${i === 0 ? `background:${s.color}22;border-color:${s.color};color:${s.color}` : ''}">
+              ${s.icon ? s.icon + ' ' : ''}${esc(s.name)}
             </button>
-          \`).join('')}
+          `).join('')}
         </div>
 
         <label class="modal-field-label">Linked task <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-muted)">(optional)</span></label>
         <select class="sort-select" id="rs-task" style="width:100%;padding:8px;margin-bottom:14px;font-size:13px">
           <option value="">No task linked</option>
-          \${tasks.map(t => \`<option value="\${t.id}">\${esc(t.title)}</option>\`).join('')}
+          ${tasks.map(t => `<option value="${t.id}">${esc(t.title)}</option>`).join('')}
         </select>
 
         <label class="modal-field-label">Repeat on</label>
         <div class="day-grid" id="rs-days" style="margin-bottom:14px">
-          \${DAY_LABELS.map((d, i) => \`<button class="day-btn" data-day="\${i}">\${d.slice(0,1)}</button>\`).join('')}
+          ${DAY_LABELS.map((d, i) => `<button class="day-btn" data-day="${i}">${d.slice(0,1)}</button>`).join('')}
         </div>
 
         <div class="modal-row-2">
@@ -660,7 +661,7 @@ function openAddRecurringModal(subjects, tasks, onSave) {
         <button class="btn-primary" id="rs-save">Save</button>
       </div>
     </div>
-  \`
+  `
   document.body.appendChild(overlay)
   requestAnimationFrame(() => overlay.querySelector('.detail-modal').classList.add('modal-open'))
 

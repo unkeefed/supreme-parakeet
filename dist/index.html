@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0f0f13">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- iOS PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Apex Focus">
+
+    <!-- Apple touch icons -->
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512.png">
+
+    <!--
+      iOS Splash Screens
+      These are generated at build time by vite-plugin-pwa or can be added manually.
+      The meta tags below cover the most common iPhone sizes.
+      For a full set use: https://progressier.com/pwa-screenshots-and-ios-splash-screen-generator
+    -->
+    <!-- iPhone 15 Pro Max / 14 Pro Max (430×932) -->
+    <link rel="apple-touch-startup-image"
+      media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+      href="/icons/splash-430x932.png">
+    <!-- iPhone 14 / 13 / 12 (390×844) -->
+    <link rel="apple-touch-startup-image"
+      media="screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+      href="/icons/splash-390x844.png">
+    <!-- iPhone SE 3rd gen (375×667) -->
+    <link rel="apple-touch-startup-image"
+      media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+      href="/icons/splash-375x667.png">
+
+    <title>Apex Focus</title>
+
+    <!-- Prevent FOUC on theme load -->
+    <script>
+      try {
+        const s = JSON.parse(localStorage.getItem('apexThemeCache') || '{}')
+        if (s.theme === 'light') document.documentElement.setAttribute('data-theme', 'light')
+      } catch {}
+    </script>
+    <script type="module" crossorigin src="/assets/index-Dv9iqOpl.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Dvbd5qDq.css">
+  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
